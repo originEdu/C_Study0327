@@ -5,6 +5,7 @@
 class UEngine
 {
 public:
+	static UEngine* Instance;
 	static UEngine* GetInstance()
 	{
 		if (Instance == nullptr)
@@ -23,7 +24,7 @@ public:
 	{
 		return World;
 	}
-	static UEngine* Instance;
+	
 protected:
 	UEngine();
 	

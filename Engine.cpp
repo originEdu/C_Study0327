@@ -33,6 +33,7 @@ void UEngine::Run()
 void UEngine::Term_E()
 {
 	delete World;
+	World = nullptr;
 }
 
 void UEngine::Input()

@@ -7,6 +7,10 @@
 #include "Wall.h"
 #include "Goal.h"
 
+#define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
+       ParentType* New##Type = SpawnActor<Type>();\
+		New##Type->SetActorLocation(X, Y);\
+
 UWorld::UWorld()
 {
 	SpawnActor<APlayer>();
@@ -56,13 +60,15 @@ void UWorld::Load(std::string Mapname)
 			{
 				if (line[i] == 'P')
 				{
-					AActor* NewActor = SpawnActor<APlayer>();
-					NewActor->SetActorLocation(X, Y);
+					DEFINE_SPAWNACTOR(AActor, APlayer, X, Y);
+					/*AActor* NewActor = SpawnActor<APlayer>();
+					NewActor->SetActorLocation(X, Y);*/
 				}
 				else if (line[i] == '#')
 				{
-					AActor* NewWall = SpawnActor<AWall>();
-					NewWall->SetActorLocation(X, Y);
+					DEFINE_SPAWNACTOR(AActor, AWall, X, Y);
+				/*	AActor* NewWall = SpawnActor<AWall>();
+					NewWall->SetActorLocation(X, Y);*/
 				}
 				else if (line[i] == ' ')
 				{
@@ -72,13 +78,15 @@ void UWorld::Load(std::string Mapname)
 				}
 				else if (line[i] == 'M')
 				{
-					AActor* NewMonster = SpawnActor<AMonster>();
-					NewMonster->SetActorLocation(X, Y);
+					DEFINE_SPAWNACTOR(AActor, AMonster, X, Y);
+					/*AActor* NewMonster = SpawnActor<AMonster>();
+					NewMonster->SetActorLocation(X, Y);*/
 				}
 				else if (line[i] == 'G')
 				{
-					AActor* NewGoal = SpawnActor<AGoal>();
-					NewGoal->SetActorLocation(X, Y);
+					DEFINE_SPAWNACTOR(AActor, AGoal, X, Y);
+					/*AActor* NewGoal = SpawnActor<AGoal>();
+					NewGoal->SetActorLocation(X, Y);*/
 				}
 				X++;
 			}
