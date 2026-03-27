@@ -1,5 +1,8 @@
 ﻿#include "Engine.h"
 #include "World.h"
+#include<iostream>
+
+UEngine* UEngine::Instance = nullptr;
 
 UEngine::UEngine()
 {
