@@ -29,5 +29,6 @@ public:
 
 protected:
 	std::vector<AActor*> Actors;
+	void Sort();
 };
 

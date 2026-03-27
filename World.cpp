@@ -1,12 +1,13 @@
 ﻿#include <fstream>
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include "World.h"
 #include "Player.h"
 #include "Monster.h"
 #include "Wall.h"
 #include "Goal.h"
-
+#include "Actor.h"
 #define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
        ParentType* New##Type = SpawnActor<Type>();\
 		New##Type->SetActorLocation(X, Y);\
@@ -92,6 +93,29 @@ void UWorld::Load(std::string Mapname)
 			}
 			X = 0;
 			Y++;
+		}
+	}
+	//있는 라이브러리로 Sort
+	//std::sort(Actors.begin(), Actors.end(),
+	//	[](AActor* First, AActor* Second)->{
+
+	//});
+		
+}
+
+void UWorld::Sort()
+{
+	for (int i = 0; i < Actors.size() - 1; i++)
+	{
+		for (int j = 0; j < Actors.size() - 1 - i; j++)
+		{
+			if (Actors[j]->GetZOrder()< Actors[j+1]->GetZOrder())
+			{
+				auto Temp = Actors[j];
+				Actors[j] = Actors[j + 1];
+				Actors[j + 1] = Temp;
+			}
+
 		}
 	}
 }

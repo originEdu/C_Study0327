@@ -10,9 +10,11 @@ public:
 	virtual void Render();
 
 	void SetActorLocation(int X, int Y);
+	inline const int GetZOrder() { return ZOrder; }
 protected:
 	int X;
 	int Y;
 	char Mesh;
+	int ZOrder;
 };
 
