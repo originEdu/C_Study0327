@@ -1,13 +1,14 @@
 ﻿#include <fstream>
 #include <string>
-#include <iostream>
 #include <algorithm>
 #include "World.h"
 #include "Player.h"
 #include "Monster.h"
 #include "Wall.h"
 #include "Goal.h"
+#include "Floor.h"
 #include "Actor.h"
+#include "Engine.h"
 #define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
        ParentType* New##Type = SpawnActor<Type>();\
 		New##Type->SetActorLocation(X, Y);\
@@ -37,10 +38,12 @@ void UWorld::Tick()
 
 void UWorld::Render()
 {
+	UEngine::Instance->Clear();
 	for (const auto& Actor : Actors)
 	{
 		Actor->Render();
 	}
+	UEngine::Instance->Flip();
 }
 
 void UWorld::Load(std::string Mapname)
@@ -62,32 +65,26 @@ void UWorld::Load(std::string Mapname)
 				if (line[i] == 'P')
 				{
 					DEFINE_SPAWNACTOR(AActor, APlayer, X, Y);
-					/*AActor* NewActor = SpawnActor<APlayer>();
-					NewActor->SetActorLocation(X, Y);*/
+					DEFINE_SPAWNACTOR(AActor, AFloor, X, Y);
 				}
 				else if (line[i] == '#')
 				{
 					DEFINE_SPAWNACTOR(AActor, AWall, X, Y);
-				/*	AActor* NewWall = SpawnActor<AWall>();
-					NewWall->SetActorLocation(X, Y);*/
+					DEFINE_SPAWNACTOR(AActor, AFloor, X, Y);
 				}
 				else if (line[i] == ' ')
 				{
-					std::cout << ' ';
-					//AActor* NewFloor = SpawnActor<AFloor>();
-					//NewFloor->SetActorLocation(X, Y);
+					DEFINE_SPAWNACTOR(AActor, AFloor, X, Y);
 				}
 				else if (line[i] == 'M')
 				{
 					DEFINE_SPAWNACTOR(AActor, AMonster, X, Y);
-					/*AActor* NewMonster = SpawnActor<AMonster>();
-					NewMonster->SetActorLocation(X, Y);*/
+					DEFINE_SPAWNACTOR(AActor, AFloor, X, Y);
 				}
 				else if (line[i] == 'G')
 				{
 					DEFINE_SPAWNACTOR(AActor, AGoal, X, Y);
-					/*AActor* NewGoal = SpawnActor<AGoal>();
-					NewGoal->SetActorLocation(X, Y);*/
+					DEFINE_SPAWNACTOR(AActor, AFloor, X, Y);
 				}
 				X++;
 			}
@@ -95,11 +92,13 @@ void UWorld::Load(std::string Mapname)
 			Y++;
 		}
 	}
+	Sort();
 	//있는 라이브러리로 Sort
-	//std::sort(Actors.begin(), Actors.end(),
-	//	[](AActor* First, AActor* Second)->{
-
-	//});
+	/*std::sort(Actors.begin(), Actors.end(),
+		[](AActor* First, AActor* Second) -> int {
+			return (First->GetZOrder() < Second->GetZOrder() ? 1 : 0);
+		}
+	);*/
 		
 }
 
@@ -109,7 +108,7 @@ void UWorld::Sort()
 	{
 		for (int j = 0; j < Actors.size() - 1 - i; j++)
 		{
-			if (Actors[j]->GetZOrder()< Actors[j+1]->GetZOrder())
+			if (Actors[j]->GetZOrder()> Actors[j+1]->GetZOrder())
 			{
 				auto Temp = Actors[j];
 				Actors[j] = Actors[j + 1];

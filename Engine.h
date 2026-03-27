@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include<vector>
 #include "World.h"
+#include <Windows.h>
 
 class UEngine
 {
@@ -14,6 +15,7 @@ public:
 		}
 		return Instance;
 	}
+	static int KeyCode;
 	virtual ~UEngine();
 	
 	void Init_E();
@@ -25,6 +27,16 @@ public:
 		return World;
 	}
 	
+	//Renderer
+	HANDLE ScreenBufferHandle[2];
+	int ActiveScreenBufferIndex = 0;
+
+	void InitBuffer();
+	void Clear();
+	void Draw(int InX, int InY, char InMesh);
+	void Flip();
+	void TermBuffer();
+
 protected:
 	UEngine();
 	
@@ -35,5 +47,6 @@ protected:
 	void Render();
 	int bIsRunning : 1;
 	
+
 };
 

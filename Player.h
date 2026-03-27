@@ -7,6 +7,6 @@ public:
 	APlayer(int InX, int InY, char InMesh);
 	virtual ~APlayer();
 
-	//virtual void Render() override;
+	virtual void Tick() override;
 };
 
