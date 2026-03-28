@@ -15,7 +15,6 @@
 
 UWorld::UWorld()
 {
-	SpawnActor<APlayer>();
 }
 
 UWorld::~UWorld()
