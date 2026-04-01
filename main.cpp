@@ -3,8 +3,31 @@
 #include "SDL.h"
 #include "SDL_main.h"
 
-int SDL_main(int arg, char* argv)
+//사용할 라이브러리 파일 추가
+#pragma comment(lib,"SDL2")
+#pragma comment(lib,"SDL2main")
+
+int SDL_main(int arg, char* argv[])
 {
+	SDL_Init(SDL_INIT_EVERYTHING);
+
+	bool isRunning = true;
+	SDL_Window* MyWindow = SDL_CreateWindow("Hello",100,100,600,600,SDL_WINDOW_SHOWN);
+	while (isRunning)
+	{
+		SDL_Event MyEvent;        // 발생한 이벤트 정보를 담을 '저장소' 선언
+		//SDL_PollEvent(&MyEvent);  // 이벤트 큐에서 가장 오래된 이벤트를 하나 꺼내옴 (꺼낼 게 있으면 1, 없으면 0 반환)
+
+		while (SDL_PollEvent(&MyEvent)) {
+			if (MyEvent.type == SDL_QUIT) {
+				isRunning = false; // 창 닫기 버튼을 누르면 메인 루프 종료
+			}
+		}
+		SDL_Renderer;
+	}
+	SDL_DestroyWindow(MyWindow);
+
+	SDL_Quit();
 	return 0;
 }
 
