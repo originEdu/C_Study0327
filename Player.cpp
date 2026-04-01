@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 #include "Engine.h"
 
-APlayer::APlayer() 
+APlayer::APlayer()
 {
 	X = 1;
 	Y = 1;
@@ -13,7 +13,7 @@ APlayer::APlayer()
 	B = 255;
 }
 
-APlayer::APlayer(int InX, int InY, char InMesh='P')
+APlayer::APlayer(int InX, int InY, char InMesh = 'P')
 {
 	X = InX;
 	Y = InY;
@@ -28,24 +28,28 @@ APlayer::~APlayer()
 void APlayer::Tick()
 {
 	__super::Tick();
-	if (UEngine::KeyCode == 'w')
+	SDL_Event Event = UEngine::Instance->GetEvent();
+	if (Event.type == SDL_KEYDOWN)
 	{
-		Y--;
-	}
-	if (UEngine::KeyCode == 's')
-	{
-		Y++;
-	}
-	if (UEngine::KeyCode == 'a')
-	{
-		X--;
-	}
-	if (UEngine::KeyCode == 'd')
-	{
-		X++;
+		switch (Event.key.keysym.sym)
+		{
+		case 'w':
+			Y--;
+			break;
+		case 's':  
+			Y++;
+			break;
+		case 'a': 
+			X--;
+			break;
+		case 'd': 
+			X++;
+			break;
+		default:
+			break;
+		}
 	}
 
-	UEngine::KeyCode = 0;
 }
 
 //void APlayer::Render() 
