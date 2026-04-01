@@ -6,6 +6,10 @@ AWall::AWall()
 	Y = 0;
 	Mesh = '#';
 	ZOrder = 1;
+
+	R = 255;
+	G = 255;
+	B = 255;
 }
 
 AWall::~AWall()

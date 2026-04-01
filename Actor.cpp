@@ -7,6 +7,9 @@ AActor::AActor()
 {
 	X = 0;
 	Y = 0;
+	R = 0;
+	G = 0;
+	B = 0;
 	Mesh = ' ';
 	ZOrder = 0;
 }
@@ -33,6 +36,7 @@ void AActor::Render()
 	//std::cout << Mesh;
 
 	UEngine::Instance->Draw(X, Y, Mesh);
+	UEngine::Instance->Draw(X,Y,R,G,B);
 }
 
 void AActor::SetActorLocation(int InX, int InY)

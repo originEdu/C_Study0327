@@ -1,6 +1,7 @@
-﻿#include "Engine.h"
+﻿#include <conio.h>
+#include "Engine.h"
 #include "World.h"
-#include <conio.h>
+#include "SDL.h"
 
 UEngine* UEngine::Instance = nullptr;
 int UEngine::KeyCode = 0;
@@ -32,6 +33,13 @@ void UEngine::Draw(int InX, int InY, char InMesh)
 	SetConsoleCursorPosition(ScreenBufferHandle[ActiveScreenBufferIndex], COORD{ (SHORT)InX, (SHORT)InY });
 	WriteFile(ScreenBufferHandle[ActiveScreenBufferIndex], MeshString, 1, NULL, NULL);
 }
+void UEngine::Draw(int InX, int InY, int R, int G, int B)
+{
+
+	SDL_SetRenderDrawColor(MyRenderer, R, G, B, 255);
+	SDL_Rect Rect = { InX * 30 ,InY * 30,30,30 };
+	SDL_RenderFillRect(MyRenderer, &Rect);
+}
 
 void UEngine::Flip()
 {
@@ -57,8 +65,14 @@ UEngine::~UEngine()
 
 void UEngine::Init_E()
 {
+	SDL_Init(SDL_INIT_EVERYTHING);
+	MyWindow = SDL_CreateWindow("Hello", 100, 100, 600, 600, SDL_WINDOW_SHOWN);
+	MyRenderer = SDL_CreateRenderer(MyWindow, -1, 0);
+
 	InitBuffer();
+
 	World = new UWorld();
+
 	bIsRunning = true;
 }
 
@@ -66,6 +80,7 @@ void UEngine::Run()
 {
 	while (bIsRunning)
 	{
+		SDL_PollEvent(&MyEvent);
 		Input();
 		Tick();
 		Render();
@@ -74,6 +89,9 @@ void UEngine::Run()
 
 void UEngine::Term_E()
 {
+	SDL_DestroyRenderer(MyRenderer);
+	SDL_DestroyWindow(MyWindow);
+	SDL_Quit();
 	delete World;
 	TermBuffer();
 	World = nullptr;
@@ -81,9 +99,17 @@ void UEngine::Term_E()
 
 void UEngine::Input()
 {
+	if (MyEvent.type == SDL_QUIT ||
+		MyEvent.key.keysym.sym == SDLK_ESCAPE) {
+		bIsRunning = false;
+	}
 	if (_kbhit())
 	{
 		KeyCode = _getch();
+	}
+	if (KeyCode== SDLK_ESCAPE)
+	{
+		bIsRunning = false;
 	}
 }
 
@@ -94,7 +120,12 @@ void UEngine::Tick()
 
 void UEngine::Render()
 {
+	SDL_SetRenderDrawColor(MyRenderer, 0, 0, 0, 255);
+	SDL_RenderClear(MyRenderer);
+
 	World->Render();
+
+	SDL_RenderPresent(MyRenderer);
 }
 
 

@@ -6,6 +6,10 @@ AGoal::AGoal()
 	Y = 0;
 	Mesh = 'G';
 	ZOrder = 3;
+
+	R = 0;
+	G = 255;
+	B = 0;
 }
 
 AGoal::~AGoal()

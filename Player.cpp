@@ -7,6 +7,10 @@ APlayer::APlayer()
 	Y = 1;
 	Mesh = 'P';
 	ZOrder = 4;
+
+	R = 0;
+	G = 0;
+	B = 255;
 }
 
 APlayer::APlayer(int InX, int InY, char InMesh='P')
