@@ -10,6 +10,8 @@ AWall::AWall()
 	R = 255;
 	G = 255;
 	B = 255;
+
+	Load("Data/wall.bmp");
 }
 
 AWall::~AWall()

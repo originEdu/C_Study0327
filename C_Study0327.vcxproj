@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="bit.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameplayStatics.cpp" />
@@ -140,7 +141,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SDLTest.cpp" />
     <ClCompile Include="SortTest.cpp" />
-    <ClCompile Include="test.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

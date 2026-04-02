@@ -38,6 +38,7 @@ public:
 	void Clear();
 	void Draw(int InX, int InY, char InMesh);
 	void Draw(int InX, int InY, int R, int G, int B);
+	void Draw(int InX, int InY, SDL_Texture* InTexture);
 	void Flip();
 	void TermBuffer();
 
@@ -52,6 +53,14 @@ public:
 		return DeltaSeconds;
 	}
 
+	inline SDL_Renderer* GetRenderer() const
+	{
+		return MyRenderer;
+	}
+	inline SDL_Window* GetWindow() const
+	{
+		return MyWindow;
+	}
 protected:
 	UEngine();
 	

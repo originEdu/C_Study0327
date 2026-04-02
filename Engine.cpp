@@ -97,6 +97,14 @@ void UEngine::Clear()
 	SDL_RenderClear(MyRenderer);
 }
 
+void UEngine::Draw(int InX, int InY, SDL_Texture* InTexture)
+{
+	int TileSize = 30;
+
+	SDL_Rect MyRect = { InX * TileSize, InY * TileSize, TileSize, TileSize };
+	SDL_RenderCopy(MyRenderer, InTexture, nullptr, &MyRect);
+}
+
 void UEngine::Draw(int InX, int InY, char InMesh)
 {
 	char MeshString[2] = { 0, };

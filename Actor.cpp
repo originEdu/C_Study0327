@@ -1,8 +1,6 @@
 ﻿#include "Actor.h"
-#include<iostream>
 #include <Windows.h>
 #include "Engine.h"
-
 AActor::AActor()
 {
 	X = 0;
@@ -21,6 +19,8 @@ AActor::AActor(int InX, int InY, char InMesh=' ')
 
 AActor::~AActor()
 {
+	SDL_FreeSurface(Image); //이미지 삭제
+	SDL_DestroyTexture(Texture); //텍스쳐 삭제
 }
 
 void AActor::Tick()
@@ -28,19 +28,23 @@ void AActor::Tick()
 }
 void AActor::Render()
 {
-	//COORD pos;
-	//pos.X = (SHORT)X; // 가로 위치
-	//pos.Y = (SHORT)Y; // 세로 위치
-	//SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-
-	//std::cout << Mesh;
-
-	UEngine::Instance->Draw(X, Y, Mesh);
-	UEngine::Instance->Draw(X,Y,R,G,B);
+	//UEngine::Instance->Draw(X, Y, Mesh);
+	//UEngine::Instance->Draw(X,Y,R,G,B);
+	UEngine::Instance->Draw(X, Y, Texture);
 }
 
 void AActor::SetActorLocation(int InX, int InY)
 {
 	X = InX;
 	Y = InY;
+}
+
+void AActor::Load(std::string Filename)
+{
+	// BMP이미지 읽어오기
+	Image = SDL_LoadBMP(Filename.c_str());
+	//Image(surface)에 특정색 제거
+	SDL_SetColorKey(Image,SDL_TRUE,SDL_MapRGB(Image->format,255,255,255)); 
+	//이미지를 텍스쳐로 변환 후 생성
+	Texture = SDL_CreateTextureFromSurface(UEngine::Instance->GetRenderer(), Image);
 }

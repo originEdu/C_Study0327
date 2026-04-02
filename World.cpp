@@ -55,6 +55,8 @@ void UWorld::Load(std::string Mapname)
 			file.ignore(3); // BOM 3바이트를 통째로 무시
 		}
 		std::string line;
+		int MaxX = 0;
+		int MaxY = 0;
 		int X = 0;
 		int Y = 0;
 		while (std::getline(file, line))
@@ -86,11 +88,19 @@ void UWorld::Load(std::string Mapname)
 					DEFINE_SPAWNACTOR(AActor, AFloor, X, Y);
 				}
 				X++;
+				if (MaxX < X)
+				{
+					MaxX = X;
+				}
 			}
 			X = 0;
 			Y++;
 		}
+		MaxY = Y;
+
+		SDL_SetWindowSize(UEngine::Instance->GetWindow(), MaxX * 30, MaxY * 30);
 	}
+	
 	Sort();
 	//있는 라이브러리로 Sort
 	/*std::sort(Actors.begin(), Actors.end(),

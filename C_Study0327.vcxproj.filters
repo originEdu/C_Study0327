@@ -51,7 +51,7 @@
     <ClCompile Include="GameplayStatics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="bit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

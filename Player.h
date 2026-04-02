@@ -8,5 +8,13 @@ public:
 	virtual ~APlayer();
 
 	virtual void Tick() override;
+	virtual void Render() override;
+	virtual void Load(std::string Filename) override;
+	
+	int CharacterArrow;
+	float AnimationChangeTime;
+	SDL_Rect SourceRect;
+	SDL_Rect DestinationRect;
+	int ImageIndex;
 };
 
