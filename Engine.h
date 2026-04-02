@@ -47,6 +47,11 @@ public:
 		return MyEvent;
 	}
 	
+	inline float GetDeltaSeconds() const
+	{
+		return DeltaSeconds;
+	}
+
 protected:
 	UEngine();
 	
@@ -61,5 +66,6 @@ protected:
 	SDL_Renderer* MyRenderer;
 	SDL_Event MyEvent;
 
+	float DeltaSeconds;
 };
 

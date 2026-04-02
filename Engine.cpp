@@ -19,7 +19,7 @@ void UEngine::Init_E()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	MyWindow = SDL_CreateWindow("Hello", 100, 100, 600, 600, SDL_WINDOW_SHOWN);
-	MyRenderer = SDL_CreateRenderer(MyWindow, -1, 0);
+	MyRenderer = SDL_CreateRenderer(MyWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 
 	InitBuffer();
 
@@ -30,13 +30,19 @@ void UEngine::Init_E()
 
 void UEngine::Run()
 {
+	Uint64 LastTime = 0;
+	Uint64 CurrentTime = 0;
 	while (bIsRunning)
 	{
+		LastTime = SDL_GetTicks64();
 		SDL_PollEvent(&MyEvent);
 		Input();
 		Tick();
 		Render();
+		CurrentTime = SDL_GetTicks64();
+		DeltaSeconds = (float)(CurrentTime - LastTime)/1000.0f;
 	}
+	
 }
 
 void UEngine::Term_E()
@@ -64,9 +70,6 @@ void UEngine::Tick()
 
 void UEngine::Render()
 {
-	SDL_SetRenderDrawColor(MyRenderer, 0, 0, 0, 255);
-	SDL_RenderClear(MyRenderer);
-
 	World->Render();
 
 	SDL_RenderPresent(MyRenderer);
@@ -89,6 +92,9 @@ void UEngine::Clear()
 {
 	DWORD DW;
 	FillConsoleOutputCharacter(ScreenBufferHandle[ActiveScreenBufferIndex], ' ', 80 * 25, COORD{ 0, 0 }, &DW);
+
+	SDL_SetRenderDrawColor(MyRenderer, 0, 0, 0, 255);
+	SDL_RenderClear(MyRenderer);
 }
 
 void UEngine::Draw(int InX, int InY, char InMesh)
