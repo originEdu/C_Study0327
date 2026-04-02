@@ -1,5 +1,6 @@
 ﻿#include "Monster.h"
 #include "Engine.h"
+#include "ResourceManger.h"
 
 AMonster::AMonster()
 {
@@ -12,7 +13,9 @@ AMonster::AMonster()
 	G = 0;
 	B = 0;
 
-	Load("Data/monster.bmp");
+	Resource TempResource = UEngine::Instance->GetResourceManger()->LoadTexture("Data/monster.bmp",true,255,255,255);
+	Image = TempResource.Image;
+	Texture = TempResource.Texture;
 }
 
 AMonster::~AMonster()

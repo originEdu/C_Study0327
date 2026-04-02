@@ -9,7 +9,6 @@ public:
 
 	virtual void Tick() override;
 	virtual void Render() override;
-	virtual void Load(std::string Filename) override;
 	
 	int CharacterArrow;
 	float AnimationChangeTime;

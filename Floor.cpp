@@ -1,4 +1,6 @@
 ﻿#include "Floor.h"
+#include "Engine.h"
+#include "ResourceManger.h"
 AFloor::AFloor()
 {
 	X = 0;
@@ -9,8 +11,9 @@ AFloor::AFloor()
 	R=0;
 	G=0;
 	B=0;
-
-	Load("Data/floor.bmp");
+	Resource TempResource= UEngine::Instance->GetResourceManger()->LoadTexture("Data/floor.bmp");
+	Image = TempResource.Image;
+	Texture = TempResource.Texture;
 }
 
 AFloor::~AFloor()

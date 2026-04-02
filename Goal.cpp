@@ -1,5 +1,6 @@
 ﻿#include "Goal.h"
-
+#include "Engine.h"
+#include "ResourceManger.h"
 AGoal::AGoal()
 {
 	X = 0;
@@ -10,8 +11,9 @@ AGoal::AGoal()
 	R = 0;
 	G = 255;
 	B = 0;
-
-	Load("Data/goal.bmp");
+	Resource TempResource = UEngine::Instance->GetResourceManger()->LoadTexture("Data/goal.bmp", true, 255, 255, 255);
+	Image = TempResource.Image;
+	Texture = TempResource.Texture;
 }
 
 AGoal::~AGoal()

@@ -1,8 +1,6 @@
 ﻿#include<iostream>
 #include"Engine.h"
 
-
-
 int SDL_main(int arg, char* argv[])
 {
 	UEngine::GetInstance();

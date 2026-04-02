@@ -12,7 +12,6 @@ public:
 	virtual void Render();
 
 	void SetActorLocation(int X, int Y);
-	virtual void Load(std::string Filename);
 	inline const int GetZOrder() { return ZOrder; }
 protected:
 	int X;

@@ -1,5 +1,6 @@
 ﻿#include "Wall.h"
-
+#include "Engine.h"
+#include "ResourceManger.h"
 AWall::AWall()
 {
 	X = 0;
@@ -10,8 +11,9 @@ AWall::AWall()
 	R = 255;
 	G = 255;
 	B = 255;
-
-	Load("Data/wall.bmp");
+	Resource TempResource = UEngine::Instance->GetResourceManger()->LoadTexture("Data/wall.bmp");
+	Image = TempResource.Image;
+	Texture = TempResource.Texture;
 }
 
 AWall::~AWall()

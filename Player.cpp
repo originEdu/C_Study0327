@@ -1,6 +1,6 @@
 ﻿#include "Player.h"
 #include "Engine.h"
-
+#include "ResourceManger.h"
 APlayer::APlayer()
 {
 	X = 1;
@@ -12,7 +12,9 @@ APlayer::APlayer()
 	G = 0;
 	B = 255;
 
-	Load("Data/player.bmp");
+	Resource TempResource = UEngine::Instance->GetResourceManger()->LoadTexture("Data/player.bmp", true, 255, 0, 255);
+	Image = TempResource.Image;
+	Texture = TempResource.Texture;
 
 	CharacterArrow = 1;
 	AnimationChangeTime = 0;
@@ -73,12 +75,6 @@ void APlayer::Tick()
 	}
 }
 
-void APlayer::Load(std::string Filename)
-{
-	Image = SDL_LoadBMP(Filename.c_str());
-	SDL_SetColorKey(Image, SDL_TRUE, SDL_MapRGB(Image->format, 255, 0, 255));
-	Texture = SDL_CreateTextureFromSurface(UEngine::Instance->GetRenderer(), Image);
-}
 
 void APlayer::Render()
 {

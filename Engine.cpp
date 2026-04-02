@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "World.h"
 #include "SDL.h"
+#include "ResourceManger.h"
 
 UEngine* UEngine::Instance = nullptr;
 
@@ -20,6 +21,8 @@ void UEngine::Init_E()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	MyWindow = SDL_CreateWindow("Hello", 100, 100, 600, 600, SDL_WINDOW_SHOWN);
 	MyRenderer = SDL_CreateRenderer(MyWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
+
+	ResourceManger = new UResourceManger();
 
 	InitBuffer();
 
@@ -51,6 +54,7 @@ void UEngine::Term_E()
 	SDL_DestroyWindow(MyWindow);
 	SDL_Quit();
 	delete World;
+	delete ResourceManger;
 	TermBuffer();
 	World = nullptr;
 }

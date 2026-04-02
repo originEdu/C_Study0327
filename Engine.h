@@ -3,6 +3,7 @@
 #include "World.h"
 #include <Windows.h>
 #include "SDL.h"
+#include "ResourceManger.h"
 
 #pragma comment(lib,"SDL2")
 #pragma comment(lib,"SDL2main")
@@ -61,11 +62,15 @@ public:
 	{
 		return MyWindow;
 	}
+	inline UResourceManger* GetResourceManger() const
+	{
+		return ResourceManger;
+	}
 protected:
 	UEngine();
 	
 	class UWorld* World;
-
+	class UResourceManger* ResourceManger;
 	void Input();
 	void Tick();
 	void Render();
