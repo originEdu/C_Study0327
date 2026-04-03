@@ -1,22 +1,26 @@
 ﻿#pragma once
 #include <vector>
 #include <string>
+#include<functional>
 #include "SDL.h"
 #include "Component.h"
+
+using FActorBeginOverlap = std::function<void(class AActor* OtherActor)>;
+
 class UComponent;
 
 class AActor
 {
 public:
 	AActor();
-	AActor(int InX, int InY, char InMesh);
+	AActor(int InX, int InY);
 	virtual ~AActor();
 
 	virtual void BeginPlay();
 	virtual void Tick();
 
 	void SetActorLocation(int X, int Y);
-	//inline const int GetZOrder() { return ZOrder; }
+
 	std::vector<UComponent*> Components;
 	inline int GetX() const
 	{
@@ -26,6 +30,10 @@ public:
 	{
 		return Y;
 	}
+	FActorBeginOverlap OnActorBeginOverlap;
+
+	virtual void ReceiveHit(class AActor* Other);
+
 protected:
 	int X;
 	int Y;
@@ -38,16 +46,5 @@ protected:
 		Components.push_back(Temp);
 		return Temp;
 	}
-
-	//int R;
-	//int G;
-	//int B;
-	//char Mesh;
-	//int ZOrder;
-
-	//SDL_Surface* Image;
-	//SDL_Texture* Texture;
-
-
 };
 

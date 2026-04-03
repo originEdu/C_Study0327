@@ -1,6 +1,7 @@
 ﻿#include "SpriteComponent.h"
 #include "Engine.h"
 #include "Actor.h"
+#include <iostream>
 
 USpriteComponent::USpriteComponent()
 {

@@ -10,5 +10,6 @@ public:
 	{
 		return UEngine::Instance->GetDeltaSeconds();
 	}
+
 };
 

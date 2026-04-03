@@ -26,6 +26,8 @@ public:
 	void Run();
 	void Term_E();
 
+	void Stop();
+
 	inline UWorld* GetWorld() const
 	{
 		return World;

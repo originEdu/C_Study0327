@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "ResourceManger.h"
 #include "SpriteComponent.h"
+#include "CollisionComponent.h"
 AWall::AWall()
 {
 	X = 0;
@@ -12,6 +13,10 @@ AWall::AWall()
 	SpriteComponent->Image = TempResource.Image;
 	SpriteComponent->Texture = TempResource.Texture;
 	SpriteComponent->ZOrder = 2;
+
+	CollisionComponent = CreateDefaultSubobject<UCollisionComponent>("Collision");
+	CollisionComponent->bIsGenerateOverlab = true;
+	CollisionComponent->bIsGenerateHit = true;
 }
 
 AWall::~AWall()

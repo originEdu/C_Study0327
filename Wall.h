@@ -7,5 +7,6 @@ public:
 	virtual ~AWall();
 
 	class USpriteComponent* SpriteComponent;
+	class UCollisionComponent* CollisionComponent;
 };
 

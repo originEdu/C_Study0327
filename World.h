@@ -21,6 +21,20 @@ public:
 
 		return NewActor;
 	}
+	//전체 액터중에서 특정 타입 엑터 찾기
+	template <typename T>
+	T* GetActorOfClass()
+	{
+		for (auto Actor : Actors)
+		{
+			T* Target = dynamic_cast<T*>(Actor);
+			if (Target)
+			{
+				return Target;
+			}
+		}
+		return nullptr;
+	}
 
 	inline std::vector<AActor*>GetActors()
 	{

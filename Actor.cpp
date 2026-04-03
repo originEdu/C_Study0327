@@ -1,6 +1,5 @@
 ﻿#include "Actor.h"
 #include <Windows.h>
-#include "Engine.h"
 #include "Component.h"
 AActor::AActor()
 {
@@ -8,7 +7,7 @@ AActor::AActor()
 	Y = 0;
 }
 
-AActor::AActor(int InX, int InY, char InMesh=' ')
+AActor::AActor(int InX, int InY)
 	:X(InX),  Y(InY)
 {
 }
@@ -38,4 +37,8 @@ void AActor::SetActorLocation(int InX, int InY)
 {
 	X = InX;
 	Y = InY;
+}
+
+void AActor::ReceiveHit(AActor* Other)
+{
 }

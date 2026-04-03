@@ -17,7 +17,7 @@ void USpriteAnimationComponent::Tick()
 	__super::Tick();
 	float DeltaTime = UEngine::Instance->GetDeltaSeconds();
 	AnimationChangeTime += DeltaTime;
-	if (AnimationChangeTime > 0.5)
+	if (AnimationChangeTime > 0.5f)
 	{
 		ImageIndex++;
 		if (ImageIndex > 4)

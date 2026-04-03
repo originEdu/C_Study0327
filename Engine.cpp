@@ -79,6 +79,11 @@ void UEngine::Render()
 	SDL_RenderPresent(MyRenderer);
 }
 
+void UEngine::Stop()
+{
+	bIsRunning = false;
+}
+
 void UEngine::InitBuffer()
 {
 	ScreenBufferHandle[0] = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);

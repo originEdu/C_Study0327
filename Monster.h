@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Actor.h"
-class AMonster :public AActor
+#include "Character.h"
+class AMonster :public ACharacter
 {
 public:
 	AMonster();
@@ -10,5 +11,7 @@ public:
 	
 	class USpriteComponent* SpriteComponent;
 	float AnimationChangeTime;
+
+	class UCollisionComponent* CollisionComponent;
 };
 

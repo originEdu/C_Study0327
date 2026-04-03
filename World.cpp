@@ -10,6 +10,7 @@
 #include "Actor.h"
 #include "Engine.h"
 #include "SpriteComponent.h"
+#include "GameMode.h"
 #define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
        ParentType* New##Type = SpawnActor<Type>();\
 		New##Type->SetActorLocation(X, Y);\
@@ -45,7 +46,7 @@ void UWorld::Render()
 		//모든 액터중에서 Render가능한 컴포넌트가 있으면 렌더 하세요
 		for (auto Component : Actor->Components)
 		{
-			USpriteComponent* RenderComponent = dynamic_cast<USpriteComponent*>(Component);
+			IRenderableComponent* RenderComponent = dynamic_cast<IRenderableComponent*>(Component);
 			if (RenderComponent)
 			{
 				RenderComponent->Render();
@@ -57,6 +58,9 @@ void UWorld::Render()
 
 void UWorld::Load(std::string Mapname)
 {
+	//게임모드 생성
+	Actors.push_back(new AGameMode());
+
 	std::ifstream file(Mapname);
 	if (file.is_open())
 	{
@@ -138,7 +142,7 @@ void UWorld::Sort()
 			}
 			if (!FirstRenderComponent)
 			{
-				return;
+				continue;
 			}
 			USpriteComponent* SecondRenderComponent = nullptr;
 			for (auto Component : Actors[j+1]->Components)
@@ -151,10 +155,10 @@ void UWorld::Sort()
 			}
 			if (!SecondRenderComponent)
 			{
-				return;
+				continue;
 			}
 
-			if (FirstRenderComponent->ZOrder> SecondRenderComponent->ZOrder)
+			if (FirstRenderComponent->ZOrder > SecondRenderComponent->ZOrder)
 			{
 				auto Temp = Actors[j];
 				Actors[j] = Actors[j + 1];

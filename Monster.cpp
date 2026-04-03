@@ -2,7 +2,8 @@
 #include "Engine.h"
 #include "ResourceManger.h"
 #include "SpriteComponent.h"
-
+#include "CollisionComponent.h"
+#include "Player.h"
 AMonster::AMonster()
 {
 	X = 0;
@@ -13,6 +14,11 @@ AMonster::AMonster()
 	SpriteComponent->Image = TempResource.Image;
 	SpriteComponent->Texture = TempResource.Texture;
 	SpriteComponent->ZOrder = 10;
+
+	//콜리전 생성
+	CollisionComponent = CreateDefaultSubobject<UCollisionComponent>("Collision");
+	CollisionComponent->bIsGenerateOverlab = true;
+	CollisionComponent->bIsGenerateHit = false;
 }
 
 AMonster::~AMonster()
@@ -24,21 +30,34 @@ void AMonster::Tick()
 	__super::Tick();
 	float DeltaTime = UEngine::Instance->GetDeltaSeconds();
 	AnimationChangeTime += DeltaTime;
-	if (AnimationChangeTime > 0.5)
+	if (AnimationChangeTime > 0.5f)
 	{
 		switch (rand() % 5)
 		{
 		case 0:
-			Y--;
+			if (PredictMove(X, Y - 1))
+			{
+				Y--;
+			}
+			
 			break;
 		case 1:
-			Y++;
+			if (PredictMove(X, Y + 1))
+			{
+				Y++;
+			}
 			break;
 		case 2:
-			X--;
+			if (PredictMove(X -1 , Y))
+			{
+				X--;
+			}
 			break;
 		case 3:
-			X++;
+			if (PredictMove(X + 1, Y))
+			{
+				X++;
+			}
 			break;
 		default:
 			break;
