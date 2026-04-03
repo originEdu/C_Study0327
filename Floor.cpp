@@ -1,19 +1,17 @@
 ﻿#include "Floor.h"
 #include "Engine.h"
 #include "ResourceManger.h"
+#include "SpriteComponent.h"
 AFloor::AFloor()
 {
 	X = 0;
 	Y = 0;
-	Mesh = ' ';
-	ZOrder = 0;
 
-	R=0;
-	G=0;
-	B=0;
+	SpriteComponent = CreateDefaultSubobject<USpriteComponent>("Sprite");
 	Resource TempResource= UEngine::Instance->GetResourceManger()->LoadTexture("Data/floor.bmp");
-	Image = TempResource.Image;
-	Texture = TempResource.Texture;
+	SpriteComponent->Image = TempResource.Image;
+	SpriteComponent->Texture = TempResource.Texture;
+	SpriteComponent->ZOrder = 1;
 }
 
 AFloor::~AFloor()

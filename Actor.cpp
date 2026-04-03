@@ -1,34 +1,37 @@
 ﻿#include "Actor.h"
 #include <Windows.h>
 #include "Engine.h"
+#include "Component.h"
 AActor::AActor()
 {
 	X = 0;
 	Y = 0;
-	R = 0;
-	G = 0;
-	B = 0;
-	Mesh = ' ';
-	ZOrder = 0;
 }
 
 AActor::AActor(int InX, int InY, char InMesh=' ')
-	:X(InX),  Y(InY), Mesh(InMesh), ZOrder(0)
+	:X(InX),  Y(InY)
 {
 }
 
 AActor::~AActor()
 {
+	for (auto Component : Components)
+	{
+		delete Component;
+	}
+	Components.clear();
+}
+
+void AActor::BeginPlay()
+{
 }
 
 void AActor::Tick()
 {
-}
-void AActor::Render()
-{
-	//UEngine::Instance->Draw(X, Y, Mesh);
-	//UEngine::Instance->Draw(X,Y,R,G,B);
-	UEngine::Instance->Draw(X, Y, Texture);
+	for (auto Component : Components)
+	{
+		Component->Tick();
+	}
 }
 
 void AActor::SetActorLocation(int InX, int InY)

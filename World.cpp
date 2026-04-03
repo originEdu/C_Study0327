@@ -9,6 +9,7 @@
 #include "Floor.h"
 #include "Actor.h"
 #include "Engine.h"
+#include "SpriteComponent.h"
 #define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
        ParentType* New##Type = SpawnActor<Type>();\
 		New##Type->SetActorLocation(X, Y);\
@@ -38,9 +39,18 @@ void UWorld::Tick()
 void UWorld::Render()
 {
 	UEngine::Instance->Clear();
-	for (const auto& Actor : Actors)
+	for (const auto Actor : Actors)
 	{
-		Actor->Render();
+		//Actor->Render(); -> 아래처럼 변경
+		//모든 액터중에서 Render가능한 컴포넌트가 있으면 렌더 하세요
+		for (auto Component : Actor->Components)
+		{
+			USpriteComponent* RenderComponent = dynamic_cast<USpriteComponent*>(Component);
+			if (RenderComponent)
+			{
+				RenderComponent->Render();
+			}
+		}
 	}
 	UEngine::Instance->Flip();
 }
@@ -117,7 +127,34 @@ void UWorld::Sort()
 	{
 		for (int j = 0; j < Actors.size() - 1 - i; j++)
 		{
-			if (Actors[j]->GetZOrder()> Actors[j+1]->GetZOrder())
+			USpriteComponent* FirstRenderComponent = nullptr;
+			for (auto Component : Actors[j]->Components)
+			{
+				FirstRenderComponent = dynamic_cast<USpriteComponent*>(Component);
+				if (FirstRenderComponent)
+				{
+					break;
+				}
+			}
+			if (!FirstRenderComponent)
+			{
+				return;
+			}
+			USpriteComponent* SecondRenderComponent = nullptr;
+			for (auto Component : Actors[j+1]->Components)
+			{
+				SecondRenderComponent = dynamic_cast<USpriteComponent*>(Component);
+				if (SecondRenderComponent)
+				{
+					break;
+				}
+			}
+			if (!SecondRenderComponent)
+			{
+				return;
+			}
+
+			if (FirstRenderComponent->ZOrder> SecondRenderComponent->ZOrder)
 			{
 				auto Temp = Actors[j];
 				Actors[j] = Actors[j + 1];

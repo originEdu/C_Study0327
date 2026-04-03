@@ -4,16 +4,12 @@ class APlayer :public AActor
 {
 public:
 	APlayer();
-	APlayer(int InX, int InY, char InMesh);
+	APlayer(int InX, int InY);
 	virtual ~APlayer();
 
 	virtual void Tick() override;
-	virtual void Render() override;
 	
-	int CharacterArrow;
-	float AnimationChangeTime;
-	SDL_Rect SourceRect;
-	SDL_Rect DestinationRect;
-	int ImageIndex;
+	class USpriteAnimationComponent* SpriteAnimationComponent;
+	
 };
 

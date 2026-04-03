@@ -8,6 +8,7 @@ public:
 
 	virtual void Tick() override;
 	
+	class USpriteComponent* SpriteComponent;
 	float AnimationChangeTime;
 };
 

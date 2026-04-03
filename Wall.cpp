@@ -1,19 +1,17 @@
 ﻿#include "Wall.h"
 #include "Engine.h"
 #include "ResourceManger.h"
+#include "SpriteComponent.h"
 AWall::AWall()
 {
 	X = 0;
 	Y = 0;
-	Mesh = '#';
-	ZOrder = 1;
 
-	R = 255;
-	G = 255;
-	B = 255;
+	SpriteComponent = CreateDefaultSubobject<USpriteComponent>("Sprite");
 	Resource TempResource = UEngine::Instance->GetResourceManger()->LoadTexture("Data/wall.bmp");
-	Image = TempResource.Image;
-	Texture = TempResource.Texture;
+	SpriteComponent->Image = TempResource.Image;
+	SpriteComponent->Texture = TempResource.Texture;
+	SpriteComponent->ZOrder = 2;
 }
 
 AWall::~AWall()

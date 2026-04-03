@@ -1,21 +1,18 @@
 ﻿#include "Monster.h"
 #include "Engine.h"
 #include "ResourceManger.h"
+#include "SpriteComponent.h"
 
 AMonster::AMonster()
 {
 	X = 0;
 	Y = 0;
-	Mesh = 'M';
-	ZOrder = 2;
 
-	R = 255;
-	G = 0;
-	B = 0;
-
-	Resource TempResource = UEngine::Instance->GetResourceManger()->LoadTexture("Data/monster.bmp",true,255,255,255);
-	Image = TempResource.Image;
-	Texture = TempResource.Texture;
+	SpriteComponent = CreateDefaultSubobject<USpriteComponent>("Sprite");
+	Resource TempResource = UEngine::Instance->GetResourceManger()->LoadTexture("Data/monster.bmp", true, 255, 255, 255);
+	SpriteComponent->Image = TempResource.Image;
+	SpriteComponent->Texture = TempResource.Texture;
+	SpriteComponent->ZOrder = 10;
 }
 
 AMonster::~AMonster()

@@ -132,10 +132,13 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="bit.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="GameplayStatics.cpp" />
     <ClCompile Include="Goal.cpp" />
+    <ClCompile Include="SpriteAnimationComponent.cpp" />
+    <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -147,12 +150,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="GameplayStatics.h" />
     <ClInclude Include="Goal.h" />
+    <ClInclude Include="SpriteAnimationComponent.h" />
+    <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RenderableComponent.h" />
     <ClInclude Include="ResourceManger.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="World.h" />

@@ -5,5 +5,7 @@ class AWall :public AActor
 public:
 	AWall();
 	virtual ~AWall();
+
+	class USpriteComponent* SpriteComponent;
 };
 
