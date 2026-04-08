@@ -29,13 +29,13 @@ void UEngine::Init_E()
 	//Mixer 인잇
 	Mix_Init(MIX_INIT_MP3);
 	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS,4096);
-	//사운드카드에 스펙 물어보는 코드
-	/*
-		int Frequency = 0;
-		Uint16 Format = 0;
-		int Channels = 0;
-		int Result = Mix_QuerySpec(&Frequency,&Format,&Channels);
-	*/
+	//사운드카드에 스펙 물어보는 코드	
+	//int Frequency = 0;
+	//Uint16 Format = 0;
+	//int Channels = 0;
+	//int Result = Mix_QuerySpec(&Frequency,&Format,&Channels);
+	//각 스펙 Frequency, Format, Channels에 반환함
+	//이를 활용하여 Mix_OpenAudio(Frequency, Format, Channels,4096); 로 사용가능
 
 	ResourceManger = new UResourceManger();
 
