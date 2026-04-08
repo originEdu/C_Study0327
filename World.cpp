@@ -12,6 +12,7 @@
 #include "SpriteComponent.h"
 #include "GameMode.h"
 #include "YoudieActor.h"
+#include "BGActor.h"
 #define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
        ParentType* New##Type = SpawnActor<Type>();\
 		New##Type->SetActorLocation(X, Y);\
@@ -48,7 +49,7 @@ void UWorld::Render()
 		for (auto Component : Actor->Components)
 		{
 			IRenderableComponent* RenderComponent = dynamic_cast<IRenderableComponent*>(Component);
-			if (RenderComponent)
+			if (RenderComponent && RenderComponent->bIsVisible)
 			{
 				RenderComponent->Render();
 			}
@@ -126,6 +127,9 @@ void UWorld::Load(std::string Mapname)
 		
 	//YouDieActor 스폰
 	SpawnActor<AYoudieActor>();
+
+	//배경음 스폰
+	SpawnActor<ABGActor>()->BeginPlay();
 }
 
 void UWorld::Sort()
@@ -134,10 +138,10 @@ void UWorld::Sort()
 	{
 		for (int j = 0; j < Actors.size() - 1 - i; j++)
 		{
-			USpriteComponent* FirstRenderComponent = nullptr;
+			IRenderableComponent* FirstRenderComponent = nullptr;
 			for (auto Component : Actors[j]->Components)
 			{
-				FirstRenderComponent = dynamic_cast<USpriteComponent*>(Component);
+				FirstRenderComponent = dynamic_cast<IRenderableComponent*>(Component);
 				if (FirstRenderComponent)
 				{
 					break;
@@ -147,15 +151,16 @@ void UWorld::Sort()
 			{
 				continue;
 			}
-			USpriteComponent* SecondRenderComponent = nullptr;
+			IRenderableComponent* SecondRenderComponent = nullptr;
 			for (auto Component : Actors[j+1]->Components)
 			{
-				SecondRenderComponent = dynamic_cast<USpriteComponent*>(Component);
+				SecondRenderComponent = dynamic_cast<IRenderableComponent*>(Component);
 				if (SecondRenderComponent)
 				{
 					break;
 				}
 			}
+			
 			if (!SecondRenderComponent)
 			{
 				continue;

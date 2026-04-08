@@ -1,0 +1,23 @@
+﻿#pragma once
+#include <string>
+#include "Component.h"
+
+struct Mix_Music;
+
+class UAudioComponent : public UComponent
+{
+public:
+	UAudioComponent();
+	virtual ~UAudioComponent();
+
+	virtual void BeginPlay() override;
+	virtual void Tick() override;
+
+	void Play();
+	void Stop();
+	void Load(std::string InFilename);
+protected:
+	std::string Filename;
+	Mix_Music* Music;
+};
+

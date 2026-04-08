@@ -4,6 +4,8 @@
 #include "Goal.h"
 #include "Engine.h"
 #include "World.h"
+#include "YoudieActor.h"
+#include "TextRender.h"
 #pragma execution_character_set("utf-8")
 AGameMode::AGameMode()
 {
@@ -36,8 +38,15 @@ void AGameMode::Tick()
 	{
 		if ((Player->GetX() == Monster->GetX()) && (Player->GetY() == Monster->GetY()))
 		{
+			AYoudieActor* TextActor = UEngine::Instance->GetWorld()->GetActorOfClass<AYoudieActor>();
+			if (TextActor)
+			{
+				TextActor->TextRenderComponent->bIsVisible = true;
+			}
+			
 			SDL_Log("죽었다!");
-			UEngine::Instance->Stop();
+			
+			//UEngine::Instance->Stop();
 		}
 	}
 }

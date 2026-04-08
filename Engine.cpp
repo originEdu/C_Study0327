@@ -3,6 +3,7 @@
 #include "World.h"
 #include "SDL.h"
 #include "ResourceManger.h"
+#include "AudioComponent.h"
 
 UEngine* UEngine::Instance = nullptr;
 
@@ -24,6 +25,17 @@ void UEngine::Init_E()
 
 	TTF_Init(); //TTF 인잇
 	Font= TTF_OpenFont("./Data/font.ttf", 24); //폰트 로딩
+
+	//Mixer 인잇
+	Mix_Init(MIX_INIT_MP3);
+	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS,4096);
+	//사운드카드에 스펙 물어보는 코드
+	/*
+		int Frequency = 0;
+		Uint16 Format = 0;
+		int Channels = 0;
+		int Result = Mix_QuerySpec(&Frequency,&Format,&Channels);
+	*/
 
 	ResourceManger = new UResourceManger();
 
@@ -53,6 +65,7 @@ void UEngine::Run()
 
 void UEngine::Term_E()
 {
+	Mix_CloseAudio();
 	TTF_CloseFont(Font);
 	TTF_Quit();
 	SDL_DestroyRenderer(MyRenderer);

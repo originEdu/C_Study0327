@@ -14,8 +14,6 @@ public:
 
 	virtual void Render() override;
 
-	int ZOrder = 0;
-
 	SDL_Surface* Image;
 	SDL_Texture* Texture;
 };

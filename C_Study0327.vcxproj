@@ -133,6 +133,8 @@ copy $(SolutionDir)SDL2_mixer\lib\x64\*.dll $(OutputPath).</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AudioComponent.cpp" />
+    <ClCompile Include="BGActor.cpp" />
     <ClCompile Include="bit.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
@@ -154,9 +156,12 @@ copy $(SolutionDir)SDL2_mixer\lib\x64\*.dll $(OutputPath).</Command>
     <ClCompile Include="TextRenderActor.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="World.cpp" />
+    <ClCompile Include="YoudieActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AudioComponent.h" />
+    <ClInclude Include="BGActor.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="Component.h" />
@@ -175,6 +180,7 @@ copy $(SolutionDir)SDL2_mixer\lib\x64\*.dll $(OutputPath).</Command>
     <ClInclude Include="TextRenderActor.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="World.h" />
+    <ClInclude Include="YoudieActor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -6,5 +6,9 @@ class IRenderableComponent
 public:
 	//순수 가상 함수
 	virtual void Render() = 0;
+
+	int ZOrder = 0;
+
+	int bIsVisible : 1;
 };
 
