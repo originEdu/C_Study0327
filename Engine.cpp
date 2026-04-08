@@ -22,6 +22,9 @@ void UEngine::Init_E()
 	MyWindow = SDL_CreateWindow("Hello", 100, 100, 600, 600, SDL_WINDOW_SHOWN);
 	MyRenderer = SDL_CreateRenderer(MyWindow, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 
+	TTF_Init(); //TTF 인잇
+	Font= TTF_OpenFont("./Data/font.ttf", 24); //폰트 로딩
+
 	ResourceManger = new UResourceManger();
 
 	InitBuffer();
@@ -50,6 +53,8 @@ void UEngine::Run()
 
 void UEngine::Term_E()
 {
+	TTF_CloseFont(Font);
+	TTF_Quit();
 	SDL_DestroyRenderer(MyRenderer);
 	SDL_DestroyWindow(MyWindow);
 	SDL_Quit();

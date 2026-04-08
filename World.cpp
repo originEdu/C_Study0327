@@ -11,6 +11,7 @@
 #include "Engine.h"
 #include "SpriteComponent.h"
 #include "GameMode.h"
+#include "YoudieActor.h"
 #define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
        ParentType* New##Type = SpawnActor<Type>();\
 		New##Type->SetActorLocation(X, Y);\
@@ -123,6 +124,8 @@ void UWorld::Load(std::string Mapname)
 		}
 	);*/
 		
+	//YouDieActor 스폰
+	SpawnActor<AYoudieActor>();
 }
 
 void UWorld::Sort()

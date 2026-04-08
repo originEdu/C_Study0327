@@ -4,9 +4,14 @@
 #include <Windows.h>
 #include "SDL.h"
 #include "ResourceManger.h"
+#include "SDL_ttf.h"
+#include "SDL_mixer.h"
+
 
 #pragma comment(lib,"SDL2")
 #pragma comment(lib,"SDL2main")
+#pragma comment(lib,"SDL2_ttf")
+#pragma comment(lib,"SDL2_mixer")
 
 class UEngine
 {
@@ -68,6 +73,9 @@ public:
 	{
 		return ResourceManger;
 	}
+
+	//get,set함수 그만만들기 위해 public으로
+	TTF_Font* Font;
 protected:
 	UEngine();
 	
