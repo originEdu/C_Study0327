@@ -90,6 +90,9 @@
     <ClCompile Include="BGActor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="YouWinActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -156,6 +159,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BGActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="YouWinActor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

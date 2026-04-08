@@ -12,6 +12,7 @@
 #include "SpriteComponent.h"
 #include "GameMode.h"
 #include "YoudieActor.h"
+#include "YouWinActor.h"
 #include "BGActor.h"
 #define DEFINE_SPAWNACTOR(ParentType,Type, X, Y)\
        ParentType* New##Type = SpawnActor<Type>();\
@@ -127,6 +128,9 @@ void UWorld::Load(std::string Mapname)
 		
 	//YouDieActor 스폰
 	SpawnActor<AYoudieActor>();
+
+	//YouDieActor 스폰
+	SpawnActor<AYouWinActor>();
 
 	//배경음 스폰
 	SpawnActor<ABGActor>()->BeginPlay();

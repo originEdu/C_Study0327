@@ -5,6 +5,7 @@
 #include "Engine.h"
 #include "World.h"
 #include "YoudieActor.h"
+#include "YouWinActor.h"
 #include "TextRender.h"
 #pragma execution_character_set("utf-8")
 AGameMode::AGameMode()
@@ -30,8 +31,13 @@ void AGameMode::Tick()
 	{
 		if ((Player->GetX() == Goal->GetX()) &&(Player->GetY() == Goal->GetY()))
 		{
+			AYouWinActor* TextActor = UEngine::Instance->GetWorld()->GetActorOfClass<AYouWinActor>();
+			if (TextActor)
+			{
+				TextActor->TextRenderComponent->bIsVisible = true;
+			}
 			SDL_Log("게임 끝!");
-			UEngine::Instance->Stop();
+			//UEngine::Instance->Stop();
 		}
 	}
 	if (Player && Monster)
