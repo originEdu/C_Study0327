@@ -129,7 +129,7 @@ void UWorld::Load(std::string Mapname)
 	//YouDieActor 스폰
 	SpawnActor<AYoudieActor>();
 
-	//YouDieActor 스폰
+	//YouWinActor 스폰
 	SpawnActor<AYouWinActor>();
 
 	//배경음 스폰
